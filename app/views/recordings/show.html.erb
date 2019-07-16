@@ -1,0 +1,55 @@
+<% unless @recording.published? %>
+  <div class="bg-gray-200 px-2 py-3 border-2 rounded mb-2">
+    <span class="font-semibold">Hey!</span> This <%= @recording.term %> is currently unpublished! Click <%= link_to 'Edit', edit_recording_path(@recording), class: 'btn btn-primary' %> and start editing when you're ready!
+  </div>
+<% end %>
+
+<div class="flex items-center">
+  <% if @recording.avatar.attached? %>
+    <%= image_tag @recording.avatar, class: 'avatar' %>
+  <% end %>
+
+  <div class="flex-1">
+    <div class="text-3xl font-bold">
+      <%= @recording.name %>
+    </div>
+
+    <%= metadata_for @recording %>
+  </div>
+
+  <% if @recording.editable? %>
+    <%= link_to 'Edit', edit_recording_path(@recording), class: 'btn btn-primary' %>
+  <% end %>
+</div>
+
+<% if @recording.banner.attached? %>
+  </div> <!-- break out of container -->
+      <%= image_tag @recording.banner, class: 'my-4 w-full' %>
+  <div class="container mx-auto">
+<% else %>
+  <div class="my-6"></div>
+<% end %>
+
+<%= @recording.content %>
+
+<% if @recording.any_links? %>
+  <div class="border-2 bg-gray-200 text-gray-700 p-2 rounded my-4 flex items-center text-4xl">
+    <% if @recording.github.present? %>
+      <%= link_to @recording.github, target: :_blank, class: 'ml-1 mr-3' do %>
+        <%= fa :github, :fab %>
+      <% end %>
+    <% end %>
+
+    <% if @recording.discord.present? %>
+      <%= link_to @recording.discord, target: :_blank, class: 'ml-1 mr-3' do %>
+        <%= fa :discord, :fab %>
+      <% end %>
+    <% end %>
+
+    <% if @recording.pokecomm.present? %>
+      <%= link_to @recording.pokecomm, target: :_blank, class: 'ml-1 mr-3' do %>
+        <div style="width: 36px; height: 36px; background-image: url(https://pokecommunity.com/images/logo-notext.php?fill=4a5568); background-position: -8px -9px; background-size: 145%;"></div>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>

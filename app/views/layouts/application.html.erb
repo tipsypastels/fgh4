@@ -5,11 +5,43 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <script defer src="https://www.pokecommunity.com/library/fontawesome-pro-5.8.2-web/js/all.min.js"></script>
+
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <%= yield %>
+    <div class="bg-gray-800 text-gray-200 py-4">
+      <div class="flex justify-center items-center">
+        <% if Current.user %>
+          <div class="font-light text-3xl tracking-tight">
+            <%= link_to root_path, class: 'flex align-center items-center' do %>
+              <div>Fangame Hacktory</div>
+
+              <div class="bg-green-600 text-white rounded px-2 py-1 uppercase font-bold text-base ml-2">
+                Alpha
+              </div>
+            <% end %>
+          </div>
+        <% else %>
+          <div class="font-light text-3xl tracking-tight">
+            <%= link_to 'Welcome to Fangame Hacktory', root_path %>
+          </div>
+
+          <%= link_to new_user_registration_path, class: 'btn btn-primary ml-4' do %>
+            Get Started
+            <%= fa 'arrow-right' %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="bg-white pt-4 mb-8">
+      <main class="container mx-auto">
+        <%= yield %>
+      </main>
+    </div>
   </body>
 </html>

@@ -1,0 +1,77 @@
+<div class="flex items-center">
+  <div class="flex-1" data-controller="filter" data-filter-url="<%= root_path %>">
+    <form>
+      <label>
+        <input 
+          type="radio" 
+          name="filter"
+          value="all"
+          data-action="filter#change"
+          <% unless Recording.type?(params[:type]) %>
+            checked
+          <% end %>  
+        >
+
+        All
+      </label>
+      <label>
+        <input 
+          type="radio" 
+          name="filter" 
+          value="game"
+          data-action="filter#change"
+          <% if params[:type]&.downcase == 'game' %>
+            checked
+          <% end %>
+        >
+
+        Games
+      </label>
+      <label>
+        <input 
+          type="radio" 
+          name="filter" 
+          value="tutorial"
+          data-action="filter#change"
+          <% if params[:type]&.downcase == 'tutorial' %>
+            checked
+          <% end %>
+        >
+
+        Tutorials
+      </label>
+      <label>
+        <input 
+          type="radio" 
+          name="filter" 
+          value="resource"
+          data-action="filter#change"
+          <% if params[:type]&.downcase == 'resource' %>
+            checked
+          <% end %> 
+        >
+
+        Resources
+      </label>
+    </form>
+  </div>
+
+  <% if Current.user %>
+    <div class="relative" data-controller="dropdown">
+      <button class="btn btn-primary" data-action="dropdown#toggle" data-target="dropdown.button">
+        Create
+        <%= fa 'caret-down' %>
+      </button>
+
+      <div class="w-full md:w-56 bg-white border-2 rounded-lg shadow-lg absolute right-0 hidden" style="top: 40px" data-target="dropdown.menu">
+        <ul>
+          <%= dropdown_link_to 'Create Game', new_recording_path(type: 'game') %>
+          <%= dropdown_link_to 'Create Tutorial', new_recording_path(type: 'tutorial') %>
+          <%= dropdown_link_to 'Create Resource', new_recording_path(type: 'resource') %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<%= rp 'list', recordings: @recordings %>

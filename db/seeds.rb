@@ -5,3 +5,19 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+GEMS = %w|diamond pearl platinum ruby sapphire emerald crystal amythest topaz lapis garnet spinel zircon tourmaline citrine morganite opal peridot rubellite spinel|
+
+# User.where.not(username: 'dakota').destroy_all
+# 25.times do |i|
+#   User.create! username: Faker::Name.unique.first_name,
+#                email: "user-#{i}@fgh.io",
+#                password: 'bad-password545'
+# end
+
+Recording.where.not(slug: 'gnosis').destroy_all
+25.times do
+  Recording.create! type: 'Game', 
+                    name: "Pokemon #{GEMS.sample.capitalize}", 
+                    user_id: User.ids.sample
+end

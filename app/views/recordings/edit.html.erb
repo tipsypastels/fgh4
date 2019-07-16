@@ -1,0 +1,119 @@
+<% unless @recording.published? %>
+  <div class="bg-gray-200 px-2 py-3 border-2 rounded mb-2">
+    When you're ready to publish your <%= @recording.term %>, check "<span class="font-semibold">Visibility</span>" in the General tab! Have fun editing!
+  </div>
+<% end %>
+
+<%= fgh_form(model: @recording.becomes(Recording)) do |f| %>
+  <div data-controller="tabs">
+    <div>
+      <button class="tab tab-active" type="button" data-tab="general" data-action="tabs#change" data-target="tabs.pill">
+        General
+      </button>
+
+      <button class="tab" type="button" data-tab="write" data-action="tabs#change" data-target="tabs.pill">
+        Write
+      </button>
+
+      <button class="tab" type="button" data-tab="paint" data-action="tabs#change" data-target="tabs.pill">
+        Paint
+      </button>
+
+      <button class="tab" type="button" data-tab="links" data-action="tabs#change" data-target="tabs.pill">
+        Links
+      </button>
+
+      <button class="tab" type="button" data-tab="downloads" data-action="tabs#change" data-target="tabs.pill">
+        Downloads
+      </button>
+    </div>
+
+    <div class="p-2 bg-gray-200 rounded">
+      <div data-tab="general" data-target="tabs.panel">
+        <%= f.fancy_text_field :name, "#{@recording.term.capitalize} Name",
+          icon: :signature
+        %>
+
+        <%= f.fancy_text_field :tag_list, 'Tags',
+          class: 'mt-2',
+          icon: :tags,
+          footnote: '(split on commas)'
+        %>
+
+        <div class="border-4 rounded p-2 mt-2">
+          <label>
+            <div class="font-semibold">
+              Visibility
+            </div>
+
+            <%= f.check_box :published, checked: @recording.published? %>
+
+            This is a published <%= @recording.term %>.
+          </label>
+        </div>
+      </div>
+
+      <div data-tab="write" data-target="tabs.panel" class="hidden">
+        <%= f.rich_text_area :content %>
+      </div>
+
+      <div data-tab="paint" data-target="tabs.panel" class="hidden">
+        <div class="border-4 rounded p-2">
+          <%= f.label :avatar, class: 'block font-bold' %>
+          <%= f.file_field :avatar %>
+        </div>
+
+        <div class="border-4 rounded p-2 mt-2">
+          <%= f.label :banner, class: 'block font-bold' %>
+          <%= f.file_field :banner %>
+        </div>
+      </div>
+
+      <div data-tab="links" data-target="tabs.panel" class="hidden">
+        <%= f.fancy_text_field :github, 'Github URL', 
+          icon: [:github, :fab] 
+        %>
+
+        <%= f.fancy_text_field :discord, 'Discord Invite', 
+          icon: [:discord, :fab], 
+          class: 'mt-2' 
+        %>
+        
+        <%= f.fancy_text_field :pokecomm, 'PokéCommunity Thread',
+          icon: "https://pokecommunity.com/images/logo-notext.php?fill=4a5568",
+          class: 'mt2'
+        %>
+      </div>
+
+      <div data-tab="downloads" data-target="tabs.panel" class="hidden">
+        coming soon!
+
+        <% if false %>
+          <div data-controller="downloads">
+            <button type="button" data-action="downloads#prepend" class="btn btn-primary">
+              <%= fa 'plus' %>
+              New Download
+            </button>
+
+            <div data-target="downloads.template" class="hidden">
+              <%= rp 'downloads/form', download: @recording.downloads.new %>
+            </div>
+
+            <div data-target="downloads.list">
+              <% @recording.downloads.each do |download| %>
+                <% if download.persisted? %>
+                  <%= rp 'downloads/form', download: download %>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-2">
+    <%= f.submit 'Save', data: { 'disable_with': 'Saving...' } %>
+    <%= link_to 'Cancel', recording_path(@recording), class: 'btn', data: { confirm: 'Cancel editing?' } %>
+  </div>
+<% end %>

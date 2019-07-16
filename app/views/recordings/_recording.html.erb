@@ -1,0 +1,36 @@
+<% # HACK 
+  # TODO figure out how to get STI to always call the variable recording
+
+  if defined?(game)
+    recording = game
+  elsif defined?(tutorial)
+    recording = tutorial
+  elsif defined?(resource)
+    recording = resource
+  end
+%>
+
+<%= cache recording do %>
+  <div class="p-2" data-recording-id="<%= recording.id %>">
+    <div class="bg-gray-100 rounded border-2">
+      <div class="flex items-center p-2">
+        
+        <% if recording.avatar.attached? %>
+          <%= link_to recording_path(recording) do %>
+            <%= image_tag recording.avatar_path, class: 'avatar' %>
+          <% end %>
+        <% end %>
+
+        <div class="flex-1">
+          <div class="font-semibold">
+            <%= link_to recording_path(recording) do %>
+              <%= recording.name %>
+            <% end %>
+          </div>
+
+          <%= metadata_for recording %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

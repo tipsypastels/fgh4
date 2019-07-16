@@ -1,0 +1,30 @@
+<div id="recordings-list">
+  <% if recordings.empty? %>
+    <% sti_style = Recording.sti_style_of(params[:type]) %>
+    <div class="flex items-center">
+      <div class="mr-2 text-6xl text-white bg-<%= sti_style[:color] %> rounded-full h-24 w-24 flex items-center justify-center">
+        <%= fa sti_style[:icon] %>
+      </div>
+
+      <div class="flex-1">
+        <div class="text-2xl font-bold">
+          There's nothing here yet...
+        </div>
+
+        <% if Current.user && params[:type] %>
+          <div class="mt-2">
+            <%= link_to new_recording_path(type: params[:type]), class: 'btn btn-primary' do %>
+              Until now? Create a <%= params[:type].capitalize %>          
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% else %>
+    <%= cache recordings do %>
+      <div class="mb-4">
+        <%= rc 'recording', recordings %>
+      </div>
+    <% end %>
+  <% end %>
+</div>

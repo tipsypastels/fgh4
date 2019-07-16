@@ -1,0 +1,13 @@
+<%= fields_for :downloads_attributes, download do |f| %>
+  <div class="border-4 rounded p-2 mt-2 flex items-center">
+    <%= f.text_field :name, name: 'recording[downloads_attributes][][name]' %>
+    <%= f.text_field :url, name: 'recording[downloads_attributes][][url]' %>
+
+    <div class="flex-1"></div>
+
+    <label>
+      <input type="checkbox" name="recording[downloads_attributes][][_delete]">
+      <span class="font-bold text-red-600">Delete</span>
+    </label>
+  </div>
+<% end %>
