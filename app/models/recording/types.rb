@@ -12,6 +12,12 @@ module Recording::Types
       end
     }
 
+    Recording::Types::LIST.each do |type|
+      scope type.downcase.pluralize, -> {
+        of_type(type)
+      }
+    end
+
     validates :type,
       presence: true,
       inclusion: { in: Recording::Types::LIST }

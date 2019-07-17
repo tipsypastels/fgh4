@@ -1,0 +1,22 @@
+$hero-background: linear-gradient(
+  to bottom right, 
+  complement(#835EFF), 
+  #FF008D,
+);
+
+.hero {
+  background: $hero-background;
+
+  .hero-text {
+    font-size: 5rem;
+    margin-bottom: -33px;
+  }
+}
+
+.hero-nav {
+  color: transparent;
+  background: $hero-background;
+
+  background-clip: text;
+  -webkit-background-clip: text;
+}

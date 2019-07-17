@@ -14,7 +14,7 @@
 #
 
 class User < ApplicationRecord
-  include Avatar, Identity, Mentionable
+  include Avatar, Customizable, Identity, Mentionable
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable

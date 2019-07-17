@@ -1,12 +1,12 @@
 <div class="text-3xl font-bold">
-  New Game
+  New Tutorial
 </div>
 
 <%= fgh_form(model: @recording.becomes(Recording)) do |f| %>
   <div class="p-2 bg-gray-200 rounded">
-    <input type="hidden" name="recording[type]" value="Game">
+    <input type="hidden" name="recording[type]" value="Tutorial">
 
-    <%= f.fancy_text_field :name, 'Game Name', 
+    <%= f.fancy_text_field :name, 'Tutorial Name', 
       icon: :signature,
       autofocus: true
     %>
@@ -14,7 +14,7 @@
     <%= f.fancy_text_field :tag_list, 'Tags',
       class: 'mt-2',
       icon: :tags,
-      footnote: 'suggested: pokeemerald, open world, etc (split on commas)'
+      footnote: 'suggested: scripting, intermediate, etc (split on commas)'
     %>
   </div>
 

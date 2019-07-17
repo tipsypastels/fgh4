@@ -1,0 +1,31 @@
+<div class="flex items-center">
+  <%= image_tag @user.avatar_path, class: 'avatar' %>
+
+  <div class="text-3xl font-bold flex-1">
+    <%= @user.username %>
+  </div>
+
+  <% if Current.user == @user %>
+    <%= link_to 'Edit', settings_path, class: 'btn btn-primary' %>
+  <% end %>
+</div>
+
+<% if @user.biography.present? %>
+  <div class="mt-2 text-2xl font-bold">
+    Biography
+  </div>
+
+  <%= @user.biography %>
+<% end %>
+
+<% Recording::Types::LIST.each do |type| %>
+  <% if (collection = @user.recordings.published.of_type(type)).present? %>
+    <div class="mt-2 text-2xl font-bold">
+      <%= type.pluralize %>
+    </div>
+
+    <% collection.each do |recording| %>
+      <%= rp 'recordings/recording', recording: recording %>
+    <% end %>
+  <% end %>
+<% end %>

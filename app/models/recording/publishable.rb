@@ -3,7 +3,11 @@ module Recording::Publishable
 
   included do
     scope :published, -> {
-      where.not(published_at: nil)
+      if Current.user
+        where('published_at IS NOT NULL OR user_id = ?', Current.user.id)
+      else
+        where.not(published_at: nil)
+      end
     }
   end
 

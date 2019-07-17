@@ -10,7 +10,14 @@ Rails.application.routes.draw do
   get '/faq', to: 'docs#faq'
   get '/tos', to: 'docs#tos'
 
-  devise_for :users
+  devise_for :users, path: '', path_names: {
+    sign_in: 'login',
+    sign_out: 'logout',
+    sign_up: 'signup',
+  }
+
+  get '/settings', to: 'settings#edit', as: :settings
+  patch '/settings', to: 'settings#update'
 
   resources :tags, only: %i|index show|
 

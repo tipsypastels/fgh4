@@ -1,0 +1,12 @@
+<div class="text-3xl font-bold">
+  Settings
+</div>
+
+<%= fgh_form(model: Current.user, url: settings_path, method: :patch) do |f| %>
+  <div class="my-2 rounded border-2 bg-gray-200">
+    <%= f.label :biography, class: 'block font-bold ml-2 text-lg' %>
+    <%= f.rich_text_area :biography %>
+  </div>
+
+  <%= f.submit 'Save' %>
+<% end %>
