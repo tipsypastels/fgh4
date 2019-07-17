@@ -1,5 +1,5 @@
 set :application, "fgh4"
-set :repo_url, "git@github.com:tipsypastels/fgh4.git"
+set :repo_url, "https://github.com/tipsypastels/fgh4"
 
 # Deploy to the user's home directory
 set :deploy_to, "/home/deploy/#{fetch :application}"
@@ -12,3 +12,4 @@ set :keep_releases, 3
 # Optionally, you can symlink your database.yml and/or secrets.yml file from the shared directory during deploy
 # This is useful if you don't want to use ENV variables
 # append :linked_files, 'config/database.yml', 'config/secrets.yml'
+set :default_run_options, { pty: true }
