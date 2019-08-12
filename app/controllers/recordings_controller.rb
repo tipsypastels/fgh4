@@ -20,11 +20,12 @@ class RecordingsController < ApplicationController
 
   def new
     unless Recording.type?(params[:type])
-      redirect_to root_path and return
+      render 'new_options' and return
     end
 
-    @recording = Recording.new
+    params[:type].downcase!
 
+    @recording = Recording.new
     render "new_#{params[:type]}"
   end
 

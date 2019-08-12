@@ -1,0 +1,22 @@
+<%= cache shout do %>
+  <% if shout.active? %>
+    <div class="bg-green-600 text-white rounded-t-lg font-bold px-2 py-1">
+      <% if Shout.available? %>
+        Active
+      <% else %>
+        Active / Locked In
+      <% end %>
+    </div>
+  <% end %>
+  <div class="shadow-lg p-2 bg-white flex">
+    <div class="flex-grow">
+      <%= shout.content %>
+    </div>
+
+    <% if Current.user == shout.user %>
+      <%= link_to 'Edit', edit_shout_path(shout), class: 'visible-link pr-1' %>
+      <%= link_to 'Bump', bump_shout_path(shout), method: :patch, class: 'visible-link pr-1' if shout.bumpable? %>
+      <%= link_to 'Delete', shout_path(shout), method: :delete, data: { confirm: 'Are you sure?' }, class: 'visible-link' %>
+    <% end %>
+  </div>
+<% end %>

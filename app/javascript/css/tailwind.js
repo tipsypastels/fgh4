@@ -2,10 +2,12 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        'display': 'Oswald',
+        'display': 'Poppins',
       }
     }
   },
-  variants: {},
-  plugins: []
+  variants: {
+    margin: ['responsive', 'hover', 'focus'],
+  },
+  plugins: [],
 }

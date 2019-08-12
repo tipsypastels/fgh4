@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Oswald&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Poppins&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -32,6 +32,12 @@
 }
 .tab-active {
   @apply text-white bg-green-600;
+}
+.visible-link {
+  @apply underline text-green-600;
+}
+.transition {
+  transition: 0.25s ease-in-out;
 }
 
 /* trix stuff */

@@ -16,11 +16,22 @@ Rails.application.routes.draw do
     sign_up: 'signup',
   }
 
+  resources :shouts, except: :show do
+    member do
+      patch '/bump', to: 'shouts#bump', as: :bump
+    end
+    
+    collection do
+      patch '/dismiss', to: 'shouts#dismiss', as: :dismiss
+    end
+  end
+
   get '/settings', to: 'settings#edit', as: :settings
   patch '/settings', to: 'settings#update'
 
   resources :tags, only: %i|index show|
 
+  get '/new', to: 'recordings#new', as: :new_recording_options
   get '/new/:type', to: 'recordings#new', as: :new_recording
   get '/:id/edit', to: 'recordings#edit', as: :edit_recording
   

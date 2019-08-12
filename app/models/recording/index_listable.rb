@@ -6,7 +6,7 @@ module Recording::IndexListable
       published
         .of_type(params[:type])
         .order(updated_at: :desc)
-        .includes(:author)
+        .includes(:author, :avatar_attachment, :tags)
     }
   end
 end

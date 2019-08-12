@@ -1,0 +1,30 @@
+<% if action_name == 'edit' %>
+  <div class="container mx-auto my-2 p-2 rounded border-2 bg-gray-200 text-gray-700">
+    <% if shout.active? %>
+      This shout <strong>is currently locked in.</strong> Shouting will unlock again in <strong><%= active_shout_expires_in %></strong>.
+    <% elsif Shout.available? %>
+      This shout is expired, but you can <%= link_to 'bump it', bump_shout_path(shout), method: :patch, class: 'visible-link' %> to make it appear on top of the page again. You could also <%= link_to 'create a new shout', new_shout_path, class: 'visible-link' %>.
+    <% else %>
+      This shout is inactive. As another shout is locked in, it <strong>cannot be bumped now</strong>.
+    <% end %>
+  </div>
+<% end %>
+
+<%= fgh_form(model: shout) do |f| %>
+  <div class="my-2 rounded border-2 bg-gray-200">
+    <div class="mb-2">
+      <%= f.label :content, class: 'block font-bold ml-2 text-lg' %>
+      <%= f.rich_text_area :content %>
+    </div>
+
+    <div>
+      <%= f.fancy_text_field :url, 'URL (Optional)', icon: :link %>
+    </div>
+  </div>
+
+  <%= f.submit %>
+
+  <% if action_name == 'edit' %>
+    or <%= link_to 'delete it', shouts_path(shout), method: :delete, data: { confirm: 'Are you sure?' }, class: 'visible-link' %>
+  <% end %>
+<% end %>

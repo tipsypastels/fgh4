@@ -3,6 +3,10 @@ module Recording::Types
 
   LIST = %w|Game Tutorial Resource|
 
+  def self.count
+    LIST.count
+  end
+
   included do
     scope :of_type, -> type {
       if Recording.type?(type)

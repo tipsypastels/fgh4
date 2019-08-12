@@ -5,6 +5,7 @@ export default class DropdownController extends Controller {
 
   toggle(e) {
     const { classList } = this.menuTarget;
+    console.log('dropdown clicked');
 
     if (classList.contains('hidden')) {
       this.openMenu();

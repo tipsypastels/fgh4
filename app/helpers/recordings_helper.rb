@@ -10,4 +10,10 @@ module RecordingsHelper
       rp('tags/list', tags: recording.tags),
     ].join.html_safe
   end
+
+  def each_recording_type_with_style
+    Recording::Types::LIST.each do |type|
+      yield(type, Recording.sti_style_of(type))
+    end
+  end
 end
