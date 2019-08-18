@@ -60,7 +60,7 @@ class RecordingsController < ApplicationController
   private
 
   def recording_params
-    params.require(:recording).permit(:name, :tag_list, :published, :type, :content, :avatar, :banner, :github, :discord, :pokecomm, downloads_attributes: [])
+    params.require(:recording).permit(:name, :tag_list, :published, :type, :content, :avatar, :banner, :github, :discord, :pokecomm, :relic_castle, downloads_attributes: [])
   end
 
   def authenticate_published!

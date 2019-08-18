@@ -32,6 +32,8 @@ gem 'devise'
 gem 'acts_as_api'
 gem 'friendly_id'
 gem 'sidekiq'
+gem 'ancestry'
+gem 'active_link_to'
 
 gem 'capistrano', '~> 3.11'
 gem 'capistrano-rails', '~> 1.4'

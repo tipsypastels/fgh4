@@ -42,6 +42,8 @@ class Shout < ApplicationRecord
     end
   end
 
+  default_scope { order(shouted_at: :desc) }
+
   before_create { raise NotAvailableError unless Shout.available? }
   after_create { update shouted_at: created_at }
 

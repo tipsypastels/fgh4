@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_12_034044) do
+ActiveRecord::Schema.define(version: 2019_08_13_054109) do
 
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
@@ -74,7 +74,19 @@ ActiveRecord::Schema.define(version: 2019_08_12_034044) do
     t.string "pokecomm"
     t.string "discord"
     t.datetime "published_at"
+    t.string "relic_castle"
+    t.integer "replies_count", default: 0
     t.index ["slug"], name: "index_recordings_on_slug", unique: true
+  end
+
+  create_table "replies", force: :cascade do |t|
+    t.string "type"
+    t.integer "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "recording_id"
+    t.string "ancestry"
+    t.index ["ancestry"], name: "index_replies_on_ancestry"
   end
 
   create_table "shouts", force: :cascade do |t|

@@ -17,7 +17,7 @@
   <% end %>
 
   <div class="bg-white flex items-center font-bold text-2xl font-display py-2 px-4 shadow-lg">
-    <div class="flex-grow text-green-600 uppercase text-3xl">
+    <div class="text-green-600 uppercase text-3xl">
       <%= link_to root_path do %>
         <span class="hidden md:block">
           Fangame Hacktory
@@ -29,7 +29,13 @@
       <% end %>
     </div>
 
+    <div class="flex-grow"></div>
+
     <div class="flex">
+      <% unless Current.user %>
+        <%= link_to 'Sign Up', new_user_registration_path, class: 'mx-2' %>
+      <% end %>
+
       <%= link_to root_path(type: 'games'), class: 'mx-2' do %>
         <%= media sm: fa(:gamepad), md: 'Games' %>
       <% end %>
@@ -52,6 +58,11 @@
             <%= dropdown_link_to 'Tutorials', root_path(type: 'tutorial') %>
             <%= dropdown_link_to 'Resources', root_path(type: 'resource') %>
             <%= dropdown_link_to 'Shouts', shouts_path %>
+
+            <% if Current.user %>
+              <%= dropdown_link_to 'Profile', Current.user %>
+              <%= dropdown_link_to 'Log Out', destroy_user_session_path, method: :delete %>
+            <% end %>
           </ul>
         </div>
       </div>

@@ -1,1 +1,9 @@
 @import '**/*';
+
+body.shout-showing #page-wrapper {
+  padding-top: 7rem;
+}
+
+body:not(.shout-showing) #page-wrapper {
+  padding-top: 5rem;
+}

@@ -8,7 +8,7 @@ class FghFormBuilder < ActionView::Helpers::FormBuilder
     ))
   end
 
-  def fancy_text_field(field, name = field, **opts)
+  def fancy_text_field(field, name = field, field_method: :text_field, **opts)
     icon = opts.delete(:icon)
     icon_html =
       if icon.is_a?(String) && icon.start_with?('http')
@@ -36,7 +36,7 @@ class FghFormBuilder < ActionView::Helpers::FormBuilder
 
       <div class="flex-1">
         #{label(field, name, class: 'block font-semibold')}
-        #{text_field(field, class: 'block w-full py-1 px-2 rounded', **opts)}
+        #{send(field_method, field, class: 'block w-full py-1 px-2 rounded', **opts)}
 
         #{footnote_html}
       </div>

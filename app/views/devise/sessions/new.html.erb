@@ -1,26 +1,36 @@
-<h2>Log in</h2>
-
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+<div class="text-center mb-2 flex justify-center items-center">
+  <div class="mr-2">
+    New to Fangame Hacktory?
   </div>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
+  <%= link_to "Sign Up #{fa(:'long-arrow-alt-right')}".html_safe, new_user_registration_path, class: 'btn btn-primary' %>
+</div>
 
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
-    </div>
-  <% end %>
+<%= fgh_form(model: resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <div class="p-2 bg-gray-200 rounded mb-2">
+    <%= f.fancy_text_field :email, 'Email',
+      icon: :at,
+      field_method: :email_field,
+      autofocus: true,
+      autocomplete: 'email'
+    %>
+
+    <%= f.fancy_text_field :password, 'Password', 
+      icon: :key,
+      field_method: :password_field,
+      autocomplete: 'current-password'
+    %>
+
+    <% if devise_mapping.rememberable? %>
+      <div class="my-2">
+        <%= f.check_box :remember_me, checked: true %>
+        <%= f.label :remember_me %>
+      </div>
+    <% end %>
+  </div>
 
   <div class="actions">
     <%= f.submit "Log in" %>
+    <%= link_to "Forgot password?", new_password_path(resource_name), class: 'btn' %>
   </div>
 <% end %>
-
-<%= render "devise/shared/links" %>

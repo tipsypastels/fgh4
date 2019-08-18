@@ -1,3 +1,14 @@
+<% unless Current.user %>
+  <div class="container mx-auto my-2 p-2 flex items-center">
+    <div class="flex-grow hidden md:block text-gray-600 text-2xl font-display font-bold">
+      <%= zig_says_hi %>
+    </div>
+
+    <%= link_to 'Log In', new_user_session_path, class: 'btn' %>
+    <%= link_to 'Sign Up', new_user_registration_path, class: 'btn btn-primary' %>
+  </div>
+<% end %>
+
 <div class="flex items-center">
   <div class="flex-1" data-controller="filter" data-filter-url="<%= root_path %>">
     <form>

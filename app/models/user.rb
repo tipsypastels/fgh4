@@ -29,6 +29,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :recordings, dependent: :destroy
+  has_many :replies, dependent: :destroy
   has_many :shouts, dependent: :destroy
 
   def mentionable_name

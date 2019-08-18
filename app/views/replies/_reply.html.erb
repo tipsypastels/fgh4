@@ -1,0 +1,54 @@
+<% cache reply do %>
+  <div data-controller="reply" data-reply-id="<%= reply.id %>" class="bg-<%= reply.depth.odd? ? 'gray-100' : 'white' %>">
+    <div class="my-2 border-2 border-gray-200 flex" data-reply-box-id="<%= reply.id %>">
+      <% if reply.author.avatar.present? %>
+        <div class="pl-1 pt-1">
+          <%= link_to reply.author do %>
+            <%= image_tag reply.author.avatar_path, class: "avatar #{'avatar-sm' unless reply.root?}" %>
+          <% end %>
+        </div>
+      <% end %>
+      
+      <div class="flex-grow">
+        <div class="flex justify-center p-2">
+          <div class="font-bold text-xl flex-grow">
+            <%= link_to reply.author do %>
+              <%= reply.author.username %>
+            <% end %>
+
+            <% if recording.author == reply.author %>
+              <span class="text-green-600 text-sm">
+                (Creator)
+              </span>
+            <% end %>
+          </div>
+
+          <div>
+            <% if Current.user %>
+              <button class="font-bold" data-action="reply#open">
+                <%= fa :comment, class: 'fa-flip-horizontal' %>
+                Reply
+              </button>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="border-t-2 mt-1 p-2 pt-1 border-<%= reply.depth.odd? ? 'gray-200' : 'gray-100' %>">
+          <%= reply.content %>
+        </div>
+
+        <% if Current.user %>
+          <div data-target="reply.input" class="hidden" data-reply-input-id="<%= reply.id %>">
+            <%= rp 'form', parent_id: reply.id %>
+          </div>
+        <% end %>
+
+        <div class="ml-3 mt-1" data-reply-children-id="<%= reply.id %>">
+          <% if defined?(children) && children.present? %>
+            <%= reply_tree_for(children, recording) %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

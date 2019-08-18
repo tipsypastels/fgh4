@@ -3,3 +3,9 @@ dakota:
   email: dakota@fgh.io
   encrypted_password: correct horse battery staple
   username: dakota
+
+larry:
+  id: 2
+  email: larry@fgh.io
+  encrypted_password: correct meme overused etc
+  username: larinicus

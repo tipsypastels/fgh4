@@ -1,0 +1,28 @@
+<% unless recording.published? %>
+  <div class="bg-gray-200 px-2 py-3 border-2 rounded mb-2">
+    <span class="font-semibold">Hey!</span> This <%= recording.term %> is currently unpublished! Click <%= link_to 'Edit', edit_recording_path(recording), class: 'btn btn-primary' %> and start editing when you're ready!
+  </div>
+<% end %>
+
+<div class="flex items-center">
+  <% if recording.avatar.attached? %>
+    <%= image_tag recording.avatar, class: 'avatar' %>
+  <% end %>
+
+  <div class="flex-1">
+    <div class="text-3xl font-bold">
+      <%= recording.name %>
+    </div>
+
+    <%= metadata_for recording %>
+  </div>
+
+  <% if recording.editable? %>
+    <%= link_to 'Edit', edit_recording_path(recording), class: 'btn btn-primary' %>
+  <% end %>
+</div>
+
+<div class="mt-4">
+  <%= active_link_to 'About', recording_path(@recording), class: 'tab-min', class_active: 'tab-min-active', active: :exact %>
+  <%= active_link_to 'Replies', replies_path(@recording), class: 'tab-min', class_active: 'tab-min-active', active: :exact %>
+</div>

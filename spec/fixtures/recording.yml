@@ -1,0 +1,6 @@
+gnosis:
+  id: 1
+  name: Pokemon Gnosis
+  user_id: 1
+  type: Game
+  slug: gnosis

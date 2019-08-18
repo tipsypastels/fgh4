@@ -1,0 +1,24 @@
+<div class="mt-2 p-2 pt-4 bg-gray-200 rounded">
+  <%= fgh_form(model: Reply.new, url: replies_path, html: { 'data-action': 'ajax:beforeSend->reply#submit' }) do |f| %>
+    <% if defined?(parent_id) %>
+      <input type="hidden" name="reply[parent_id]" value="<%= parent_id %>">
+    <% end %>
+    
+    <input type="hidden" name="reply[type]" value="Comment">
+
+    <div class="px-2 pb-2">
+      <%# trix is dumb and fails with multiple content areas so we have to use some aliasing %>
+      <%= f.rich_text_area :"content_#{defined?(parent_id) ? parent_id : 'root'}", name: 'reply[content]' %>
+    </div>      
+
+    <div class="">
+      <%= f.submit 'Submit' %>
+
+      <% if defined?(parent_id) %>
+        <button type="button" class="btn" data-action="reply#close">
+          Nevermind
+        </button>
+      <% end %>
+    </div>
+  <% end %>
+</div>

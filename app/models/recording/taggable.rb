@@ -12,7 +12,7 @@ module Recording::Taggable
 
   def tag_list=(tag_list)
     self.tags = tag_list.split(/,/).map do |name|
-      name = name.chomp.delete('#')
+      name = name.strip.delete('#')
       Tag.find_or_create_by(name: name)
     end
   end

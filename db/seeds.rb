@@ -15,9 +15,20 @@ GEMS = %w|diamond pearl platinum ruby sapphire emerald crystal amythest topaz la
 #                password: 'bad-password545'
 # end
 
-Recording.where.not(slug: 'gnosis').destroy_all
-25.times do
-  Recording.create! type: 'Game', 
-                    name: "Pokemon #{GEMS.sample.capitalize}", 
-                    user_id: User.ids.sample
+# Recording.where.not(slug: 'gnosis').destroy_all
+# 25.times do
+#   Recording.create! type: 'Game', 
+#                     name: "Pokemon #{GEMS.sample.capitalize}", 
+#                     user_id: User.ids.sample
+# end
+
+Reply.destroy_all
+250.times do
+  recording = Recording.order('random()').take
+
+  Reply.create! type: 'Comment',
+                content: Faker::Quotes::Shakespeare.hamlet_quote,
+                recording: recording,
+                user_id: User.ids.sample,
+                parent_id: rand(0...100) <= 50 ? nil : recording.replies.ids.sample
 end

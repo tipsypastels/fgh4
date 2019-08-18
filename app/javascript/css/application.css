@@ -24,7 +24,7 @@
   @apply h-16 rounded-lg border-2 mr-2;
 }
 .avatar-sm {
-  @apply h-6;
+  @apply h-12;
 }
 .tab {
   @apply outline-none bg-gray-200 rounded rounded-t-lg px-4 py-1 font-bold text-gray-700;
@@ -33,11 +33,33 @@
 .tab-active {
   @apply text-white bg-green-600;
 }
+.tab-min {
+  @apply outline-none font-bold px-4 py-1 border-b-2 border-gray-200;
+  outline: none !important;
+}
+.tab-min-active {
+  @apply text-green-600 border-green-600;
+}
 .visible-link {
   @apply underline text-green-600;
 }
 .transition {
   transition: 0.25s ease-in-out;
+}
+.modal {
+  @apply fixed inset-0 w-screen h-screen z-50 items-center justify-center;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.modal:not(.hidden) {
+  @apply flex;
+}
+.modal-body {
+  @apply bg-white w-full mx-auto shadow-lg;
+}
+@screen md {
+  .modal-body {
+    @apply w-4/5;
+  }
 }
 
 /* trix stuff */

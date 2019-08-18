@@ -24,7 +24,7 @@ export default class TabsController extends Controller {
     }
 
     for (let pill of this.pillTargets) {
-      this.applySelectedTab(tabIndex, pill, 'tab-active');
+      this.applySelectedTab(tabIndex, pill, this.activeClass);
     }
   }
 
@@ -38,5 +38,9 @@ export default class TabsController extends Controller {
       classList.remove(activeClass);
       classList.add(passiveClass);
     }
+  }
+
+  get activeClass() {
+    return this.data.get('activeClass') || 'tab-active';
   }
 }

@@ -12,7 +12,7 @@
 
 <%= cache recording do %>
   <div class="p-2" data-recording-id="<%= recording.id %>">
-    <div class="bg-gray-100 rounded border-2">
+    <div class="shadow-lg bg-gray-100 rounded border-2">
       <div class="flex items-center p-2">
         
         <% if recording.avatar.attached? %>
@@ -29,6 +29,16 @@
           </div>
 
           <%= metadata_for recording %>
+        </div>
+
+        <div class="text-center text-gray-700">
+          <div class="text-3xl">
+            <%= recording.replies_count %>
+          </div>
+
+          <div class="font-bold uppercase">
+            Replies
+          </div>
         </div>
       </div>
     </div>

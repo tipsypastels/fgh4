@@ -7,8 +7,8 @@ Rails.application.routes.draw do
   end
 
   get '/todo', to: 'docs#todo'
-  get '/faq', to: 'docs#faq'
-  get '/tos', to: 'docs#tos'
+  get '/faq',  to: 'docs#faq'
+  get '/tos',  to: 'docs#tos'
 
   devise_for :users, path: '', path_names: {
     sign_in: 'login',
@@ -37,8 +37,14 @@ Rails.application.routes.draw do
   
   get '/@:id', to: 'users#show', as: :user
 
+  resources :replies, only: %i|update destroy|, as: :reply
   resources :recordings, only: %i|create|
   
+  # since these are the same route and we can't have duplicate methods
+  # we force it to not create one for the later ones and just use them identically
+  get '/:id/replies', to: 'replies#show', as: :replies
+  post '/:id/replies', to: 'replies#create', as: nil
+
   get '/:id', to: 'recordings#show', as: :recording
   patch '/:id', to: 'recordings#update'
   

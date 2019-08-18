@@ -2,18 +2,20 @@
 #
 # Table name: recordings
 #
-#  id           :integer          not null, primary key
-#  color        :string
-#  discord      :string
-#  github       :string
-#  name         :string
-#  pokecomm     :string
-#  published_at :datetime
-#  slug         :string
-#  type         :string
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
-#  user_id      :integer
+#  id            :integer          not null, primary key
+#  color         :string
+#  discord       :string
+#  github        :string
+#  name          :string
+#  pokecomm      :string
+#  published_at  :datetime
+#  relic_castle  :string
+#  replies_count :integer          default(0)
+#  slug          :string
+#  type          :string
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  user_id       :integer
 #
 # Indexes
 #
@@ -23,7 +25,7 @@
 class Recording < ApplicationRecord
   include Types
 
-  include Authored, Content, Colorable, Downloadable, IndexListable, Mentionable, Named, Paintable, Publishable, SocialLinkable, Reactable, Taggable
+  include Authored, Content, Colorable, Downloadable, IndexListable, Mentionable, Named, Paintable, Publishable, SocialLinkable, Reactable, Replyable, Taggable
 
   def term
     type.downcase

@@ -81,7 +81,13 @@
         
         <%= f.fancy_text_field :pokecomm, 'PokéCommunity Thread',
           icon: "https://pokecommunity.com/images/logo-notext.php?fill=4a5568",
-          class: 'mt2'
+          class: 'mt-2'
+        %>
+
+        <%# TODO proper icon for rc %>
+        <%= f.fancy_text_field :relic_castle, 'Relic Castle Thread',
+          icon: :leaf,
+          class: 'mt-2'
         %>
       </div>
 

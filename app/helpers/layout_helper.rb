@@ -3,8 +3,8 @@ module LayoutHelper
    # TODO 
   end
   
-  def dropdown_link_to(name, path)
-    tag.li link_to(name, path, class: 'block py-2 px-4 hover:bg-gray-100')
+  def dropdown_link_to(name, path, **opts)
+    tag.li link_to(name, path, class: 'block py-2 px-4 hover:bg-gray-100', **opts)
   end
 
   def media(sm:, md:, display: :block)

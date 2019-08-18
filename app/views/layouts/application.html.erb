@@ -1,26 +1,30 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Fgh4</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<% if @no_body %>
+  <%= yield %>
+<% else %>
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <title>Fgh4</title>
+      <%= csrf_meta_tags %>
+      <%= csp_meta_tag %>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <script defer src="https://www.pokecommunity.com/library/fontawesome-pro-5.8.2-web/js/all.min.js"></script>
+      <script defer src="https://www.pokecommunity.com/library/fontawesome-pro-5.8.2-web/js/all.min.js"></script>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+      <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+      <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+      <%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    </head>
 
-  <body>
-    <%= rp 'layouts/banner' %>
+    <body class="<%= 'shout-showing' if Shout.show? %>">
+      <%= rp 'layouts/banner' %>
 
-    <div class="bg-white pt-32 mb-8">
-      <main class="container mx-auto">
-        <%= yield %>
-      </main>
-    </div>
-  </body>
-</html>
+      <div id="page-wrapper" class="bg-white mb-8">
+        <main class="container mx-auto">
+          <%= yield %>
+        </main>
+      </div>
+    </body>
+  </html>
+<% end %>

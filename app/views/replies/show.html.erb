@@ -1,0 +1,17 @@
+<%= rp 'recordings/header', recording: @recording %>
+
+<% if Current.user %>
+  <div class="mt-4">
+    <h1 class="text-3xl font-bold text-gray-700">
+      Join the discussion
+    </h1>
+
+    <div id="reply-root-input" data-controller="reply">
+      <%= rp 'form' %>
+    </div>
+  </div>
+<% end %>
+
+<div class="mt-6" id="replies-root">
+  <%= reply_tree_for(@replies, @recording) %>
+</div>
