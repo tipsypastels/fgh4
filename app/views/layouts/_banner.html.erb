@@ -1,6 +1,6 @@
 <div class="fixed w-full z-50">
   <% if Shout.show? %>
-    <div id="shout" class="flex bg-green-600 text-white text-center py-1 px-2 font-bold">
+    <div id="shout" class="flex bg-bg-white text-green-700 text-center py-1 px-2 font-bold">
 
       <div class="flex-grow text-center">
         <%= link_to Shout.active.url || '#' do %>
@@ -16,8 +16,8 @@
     </div>
   <% end %>
 
-  <div class="bg-white flex items-center font-bold text-2xl font-display py-2 px-4 shadow-lg">
-    <div class="text-green-600 uppercase text-3xl">
+  <div class="bg-green-600 text-white flex items-center font-bold text-2xl font-display py-2 px-4 shadow-lg">
+    <div class="text-white uppercase text-3xl">
       <%= link_to root_path do %>
         <span class="hidden md:block">
           Fangame Hacktory
@@ -53,7 +53,7 @@
           <%= fa 'caret-down' %>
         </div>
 
-        <div class="w-full md:w-64 bg-white border-2 rounded-lg shadow-lg absolute right-0 hidden" style="top: 50px" data-target="dropdown.menu">
+        <div class="w-full md:w-64 bg-white text-black border-2 rounded-lg shadow-lg absolute right-0 hidden" style="top: 50px" data-target="dropdown.menu">
           <ul>
             <%= dropdown_link_to 'Tutorials', root_path(type: 'tutorial') %>
             <%= dropdown_link_to 'Resources', root_path(type: 'resource') %>

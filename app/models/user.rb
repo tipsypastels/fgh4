@@ -3,8 +3,11 @@
 # Table name: users
 #
 #  id                     :integer          not null, primary key
+#  age                    :decimal(, )
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
+#  gender                 :decimal(, )
+#  location               :string
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
@@ -21,7 +24,7 @@
 #
 
 class User < ApplicationRecord
-  include Avatar, Customizable, Identity, Mentionable
+  include Avatar, Customizable, Identity, Mentionable, Roles
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -29,6 +32,10 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :recordings, dependent: :destroy
+  has_many :featured_recordings, -> { where.not(featured_at: nil).order(featured_at: :desc) }, 
+    class_name: 'Recording', 
+    inverse_of: :author
+
   has_many :replies, dependent: :destroy
   has_many :shouts, dependent: :destroy
 

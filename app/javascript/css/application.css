@@ -21,10 +21,14 @@
   @apply mr-2;
 }
 .avatar {
-  @apply h-16 rounded-lg border-2 mr-2;
+  @apply h-16 mr-2;
 }
 .avatar-sm {
   @apply h-12;
+}
+.avatar-lg {
+  height: unset;
+  @apply w-full;
 }
 .tab {
   @apply outline-none bg-gray-200 rounded rounded-t-lg px-4 py-1 font-bold text-gray-700;
@@ -60,6 +64,21 @@
   .modal-body {
     @apply w-4/5;
   }
+}
+.table {
+  @apply w-full;
+}
+.table tr {
+  @apply border-t-2;
+}
+.table tr:nth-child(odd) {
+  @apply bg-gray-200;
+}
+.table tr:nth-child(even) {
+  @apply bg-white;
+}
+.table td {
+  @apply px-2 py-1;
 }
 
 /* trix stuff */

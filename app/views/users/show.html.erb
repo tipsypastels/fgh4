@@ -1,31 +1,70 @@
-<div class="flex items-center">
-  <%= image_tag @user.avatar_path, class: 'avatar' %>
+<div class="flex mb-4">
+  <div class="w-2/5 p-2">
+    <%= image_tag @user.avatar_path, class: 'avatar avatar-lg' %>
 
-  <div class="text-3xl font-bold flex-1">
-    <%= @user.username %>
+    <% if @user.biography %>
+      <div class="mt-4 border-t-2 pt-2">
+        <%= @user.biography %>
+      </div>
+    <% end %>
   </div>
 
-  <% if Current.user == @user %>
-    <%= link_to 'Edit', settings_path, class: 'btn btn-primary' %>
-  <% end %>
-</div>
-
-<% if @user.biography.present? %>
-  <div class="mt-2 text-2xl font-bold">
-    Biography
-  </div>
-
-  <%= @user.biography %>
-<% end %>
-
-<% Recording::Types::LIST.each do |type| %>
-  <% if (collection = @user.recordings.published.of_type(type)).present? %>
-    <div class="mt-2 text-2xl font-bold">
-      <%= type.pluralize %>
+  <div class="w-2/5 p-2">
+    <div class="mr-1 text-4xl font-bold text-<%= @user.name_color %>">
+      <%= @user.username %>
+    </div>
+    
+    <div class="flex">
+      <% if @user.roles.primary %>
+        <div class="border-<%= @user.roles.primary.color %> border rounded">
+          <div class="text-white text-sm bg-<%= @user.roles.primary.color %> border-white border px-2 italic rounded">
+            <%= @user.roles.primary.title %>
+          </div>
+        </div>
+      <% end %>
     </div>
 
-    <% collection.each do |recording| %>
-      <%= rp 'recordings/recording', recording: recording %>
+    <table class="table mt-2">
+      <% if @user.age %>
+        <tr>
+          <td>Age</td>
+          <td class="font-bold"><%= @user.age.to_i %></td>
+        </tr>
+      <% end %>
+
+      <% if @user.gender %>
+        <tr>
+          <td>Gender</td>
+          <td class="font-bold">
+            <%= @user.gender.humanize %>
+          </td>
+        </tr>
+      <% end %>
+
+      <% if @user.location %>
+        <tr>
+          <td>Location</td>
+          <td class="font-bold"><%= @user.location %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+
+  <div class="w-1/5 p-2">
+    <% if Current.user == @user %>
+      <div class="flex justify-end">
+        <%= link_to 'Edit Profile', settings_path, class: 'text-green-600 hover:underline' %>
+      </div>
     <% end %>
-  <% end %>
-<% end %>
+
+    <div class="mt-2">
+      <% @user.featured_recordings.take(3).each do |recording| %>
+        <%= link_to recording_path(recording), title: recording.name, class: 'border-red-600 border mb-2 block' do %>
+          <div class="border-white border bg-red-600 text-white">
+            <%= image_tag recording.avatar, class: 'w-full' %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

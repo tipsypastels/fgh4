@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_30_180336) do
+ActiveRecord::Schema.define(version: 2019_09_14_112934) do
 
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
@@ -76,6 +76,7 @@ ActiveRecord::Schema.define(version: 2019_08_30_180336) do
     t.datetime "published_at"
     t.string "relic_castle"
     t.integer "replies_count", default: 0
+    t.datetime "featured_at"
     t.index ["slug"], name: "index_recordings_on_slug", unique: true
   end
 
@@ -87,6 +88,13 @@ ActiveRecord::Schema.define(version: 2019_08_30_180336) do
     t.integer "recording_id"
     t.string "ancestry"
     t.index ["ancestry"], name: "index_replies_on_ancestry"
+  end
+
+  create_table "roles", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "shouts", force: :cascade do |t|
@@ -123,6 +131,9 @@ ActiveRecord::Schema.define(version: 2019_08_30_180336) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "shout_dismissed_at"
+    t.decimal "age"
+    t.string "location"
+    t.decimal "gender"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true

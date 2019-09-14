@@ -5,6 +5,7 @@
 #  id            :integer          not null, primary key
 #  color         :string
 #  discord       :string
+#  featured_at   :datetime
 #  github        :string
 #  name          :string
 #  pokecomm      :string
