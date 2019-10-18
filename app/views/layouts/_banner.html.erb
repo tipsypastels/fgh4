@@ -1,10 +1,10 @@
 <div class="fixed w-full z-50">
   <% if Shout.show? %>
-    <div id="shout" class="flex bg-bg-white text-green-700 text-center py-1 px-2 font-bold">
+    <div id="shout" class="flex bg-gray-900 text-white text-center py-1 px-2 font-bold">
 
       <div class="flex-grow text-center">
-        <%= link_to Shout.active.url || '#' do %>
-          <%= Shout.active.content %>
+        <%= link_to Shout.active.url || '#', class: 'flex justify-center' do %>
+          <%= Shout.active.content %> <div class="ml-1">— <%= Shout.active.user.username %></div>
         <% end %>
       </div>
 
@@ -16,26 +16,14 @@
     </div>
   <% end %>
 
-  <div class="bg-green-600 text-white flex items-center font-bold text-2xl font-display py-2 px-4 shadow-lg">
-    <div class="text-white uppercase text-3xl">
+  <div class="bg-gray-800 text-white flex items-center font-bold font-display py-2 px-4 shadow-lg">
+    <div class="text-white uppercase text-3xl mr-2">
       <%= link_to root_path do %>
-        <span class="hidden md:block">
-          Fangame Hacktory
-        </span>
-
-        <span class="md:hidden">
-          FGH
-        </span>
+        FGH
       <% end %>
     </div>
 
-    <div class="flex-grow"></div>
-
     <div class="flex">
-      <% unless Current.user %>
-        <%= link_to 'Sign Up', new_user_registration_path, class: 'mx-2' %>
-      <% end %>
-
       <%= link_to root_path(type: 'games'), class: 'mx-2' do %>
         <%= media sm: fa(:gamepad), md: 'Games' %>
       <% end %>
@@ -53,7 +41,7 @@
           <%= fa 'caret-down' %>
         </div>
 
-        <div class="w-full md:w-64 bg-white text-black border-2 rounded-lg shadow-lg absolute right-0 hidden" style="top: 50px" data-target="dropdown.menu">
+        <div class="w-full md:w-64 bg-white text-black border-2 rounded-lg shadow-lg absolute left-0 hidden" style="top: 50px" data-target="dropdown.menu">
           <ul>
             <%= dropdown_link_to 'Tutorials', root_path(type: 'tutorial') %>
             <%= dropdown_link_to 'Resources', root_path(type: 'resource') %>
@@ -66,6 +54,19 @@
           </ul>
         </div>
       </div>
+    </div>
+
+    <div class="flex-grow"></div>
+  
+    <div>
+      <% if Current.user %>
+        <%= link_to Current.user, class: 'flex items-center' do %>
+          <%= image_tag Current.user.avatar, class: 'avatar avatar-xs mr-1' %>
+          <%= Current.user.username %>
+        <% end %>
+      <% else %>
+        <%= link_to 'Sign Up', new_user_registration_path %>
+      <% end %>
     </div>
   </div>
 </div>

@@ -2,7 +2,7 @@
   <div class="w-2/5 p-2">
     <%= image_tag @user.avatar_path, class: 'avatar avatar-lg' %>
 
-    <% if @user.biography %>
+    <% if @user.biography.present? %>
       <div class="mt-4 border-t-2 pt-2">
         <%= @user.biography %>
       </div>
@@ -47,6 +47,26 @@
           <td class="font-bold"><%= @user.location %></td>
         </tr>
       <% end %>
+
+      <tr>
+        <td>Games</td>
+        <td class="font-bold"><%= @user.games.count %></td>
+      </tr>
+
+      <tr>
+        <td>Tutorials</td>
+        <td class="font-bold"><%= @user.tutorials.count %></td>
+      </tr>
+
+      <tr>
+        <td>Resources</td>
+        <td class="font-bold"><%= @user.resources.count %></td>
+      </tr>
+
+      <tr>
+        <td>Replies</td>
+        <td class="font-bold"><%= @user.replies.count %></td>
+      </tr>
     </table>
   </div>
 

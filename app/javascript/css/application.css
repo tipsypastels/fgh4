@@ -23,6 +23,9 @@
 .avatar {
   @apply h-16 mr-2;
 }
+.avatar-xs {
+  @apply h-8;
+}
 .avatar-sm {
   @apply h-12;
 }

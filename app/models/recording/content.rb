@@ -2,6 +2,7 @@ module Recording::Content
   extend ActiveSupport::Concern
 
   included do
+    has_rich_text :description
     has_rich_text :content
     before_validation :create_default_content, on: :create
 

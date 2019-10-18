@@ -31,8 +31,7 @@ Rails.application.routes.draw do
 
   resources :tags, only: %i|index show|
 
-  get '/new', to: 'recordings#new', as: :new_recording_options
-  get '/new/:type', to: 'recordings#new', as: :new_recording
+  get '/new', to: 'recordings#new', as: :new_recording
   get '/:id/edit', to: 'recordings#edit', as: :edit_recording
   
   get '/@:id', to: 'users#show', as: :user

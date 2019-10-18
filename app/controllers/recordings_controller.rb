@@ -19,14 +19,7 @@ class RecordingsController < ApplicationController
   end
 
   def new
-    unless Recording.type?(params[:type])
-      render 'new_options' and return
-    end
-
-    params[:type].downcase!
-
     @recording = Recording.new
-    render "new_#{params[:type]}"
   end
 
   def create
@@ -60,7 +53,7 @@ class RecordingsController < ApplicationController
   private
 
   def recording_params
-    params.require(:recording).permit(:name, :tag_list, :published, :type, :content, :avatar, :banner, :github, :discord, :pokecomm, :relic_castle, downloads_attributes: [])
+    params.require(:recording).permit(:name, :tag_list, :published, :type, :description, :content, :avatar, :banner, :github, :discord, :pokecomm, :relic_castle, downloads_attributes: [])
   end
 
   def authenticate_published!

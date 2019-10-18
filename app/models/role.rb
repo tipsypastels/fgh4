@@ -12,6 +12,8 @@
 class Role < ApplicationRecord
   include Comparable
 
+  belongs_to :user
+
   ROLES = {
     tech_admin: {
       color: 'orange-500',

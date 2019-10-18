@@ -36,6 +36,12 @@ class User < ApplicationRecord
     class_name: 'Recording', 
     inverse_of: :author
 
+  %w|Game Tutorial Resource|.each do |recording|
+    has_many recording.downcase.pluralize.to_sym, -> { where type: recording },
+      class_name: 'Recording',
+      inverse_of: :author
+  end
+
   has_many :replies, dependent: :destroy
   has_many :shouts, dependent: :destroy
 
